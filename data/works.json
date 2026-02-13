@@ -1,0 +1,110 @@
+[
+  {
+    "id": "sys-3d-render-order",
+    "title": "3D 渲染圖自動下單系統",
+    "summary": "整合 3D 渲染圖檔與訂單流程，實現設計確認到生產下單的自動化串接。",
+    "category": "automation",
+    "tags": ["C#", ".NET", "API 串接", "自動化流程", "SQL Server"],
+    "date": "2024-06-15",
+    "cover": "assets/images/works/sys-3d-render-order/cover.jpg",
+    "images": [
+      "assets/images/works/sys-3d-render-order/01.jpg"
+    ],
+    "links": {
+      "demo": "",
+      "download": ""
+    },
+    "content": "<h2>背景與目標</h2><p>業務端在接單時需要提供 3D 渲染效果圖給客戶確認，確認後再手動將訂單資料輸入生產系統。這個流程涉及多次人工轉檔、資料重新輸入，不僅耗時且容易出錯。目標是將設計確認到下單的流程全面自動化。</p><h2>我做了什麼</h2><ul><li>分析現有人工作業流程，找出自動化切入點</li><li>設計系統架構，串接渲染圖管理系統與 ERP 訂單模組</li><li>開發自動化下單介面，將渲染圖確認結果直接轉為生產工單</li><li>建立規格比對與驗證機制，防止資料錯誤</li><li>錯誤處理與異常通知機制</li></ul><h2>技術與架構</h2><ul><li>C# / .NET 開發核心邏輯</li><li>API 串接渲染圖管理系統</li><li>SQL Server 資料存取與交易控制</li><li>Windows 排程觸發自動化流程</li></ul><h2>成果</h2><ul><li>下單作業時間從平均 30 分鐘縮短至 5 分鐘以內</li><li>資料輸入錯誤率從 8% 降至趨近於零</li><li>業務端可即時追蹤訂單狀態</li></ul>",
+    "featured": true
+  },
+  {
+    "id": "sys-line-notify",
+    "title": "LINE Notify 企業公告系統",
+    "summary": "串接 LINE Notify API，實現企業內部公告、異常告警的即時推播通知。",
+    "category": "automation",
+    "tags": ["C#", "LINE Notify API", "Webhook", "自動化", "SQL Server"],
+    "date": "2024-03-20",
+    "cover": "assets/images/works/sys-line-notify/cover.jpg",
+    "images": [
+      "assets/images/works/sys-line-notify/01.jpg"
+    ],
+    "links": {
+      "demo": "",
+      "download": ""
+    },
+    "content": "<h2>背景與目標</h2><p>企業內部的重要公告過去透過 Email 發送，但開信率低、時效性差。系統異常告警也常因未即時查看信箱而延誤處理。目標是建立一套即時推播機制，讓重要訊息在第一時間送達相關人員。</p><h2>我做了什麼</h2><ul><li>評估通知管道（LINE / Email / SMS），選定 LINE Notify 作為主要方案</li><li>設計公告管理後台，支援分群組發送</li><li>串接 LINE Notify API，實現文字與圖片推播</li><li>整合系統異常監控，自動觸發告警通知</li><li>建立發送紀錄與失敗重試機制</li></ul><h2>技術與架構</h2><ul><li>C# / .NET 開發推播服務</li><li>LINE Notify REST API 串接</li><li>SQL Server 管理公告內容與發送紀錄</li><li>Webhook 接收外部系統事件觸發</li></ul><h2>成果</h2><ul><li>重要訊息送達率從 60% 提升至 95% 以上</li><li>系統異常平均回應時間從 2 小時縮短至 15 分鐘</li><li>全公司超過百人使用，日均推播通知 50+ 則</li></ul>",
+    "featured": true
+  },
+  {
+    "id": "sys-task-management",
+    "title": "企業內部任務管理平台",
+    "summary": "Web-based 任務管理系統，支援跨部門任務指派、進度追蹤與統計分析。",
+    "category": "web",
+    "tags": ["ASP.NET", "C#", "SQL Server", "Web", "jQuery"],
+    "date": "2023-11-10",
+    "cover": "assets/images/works/sys-task-management/cover.jpg",
+    "images": [
+      "assets/images/works/sys-task-management/01.jpg"
+    ],
+    "links": {
+      "demo": "",
+      "download": ""
+    },
+    "content": "<h2>背景與目標</h2><p>企業內部跨部門的任務交辦長期依賴 Email 與口頭溝通，經常發生任務遺漏、責任不清、進度不透明等問題。管理層也缺乏量化的工作負荷數據。目標是建置一套適合企業文化的任務管理系統。</p><h2>我做了什麼</h2><ul><li>訪談各部門主管，釐清任務流程與痛點</li><li>設計任務生命週期（指派、執行、回報、結案）</li><li>開發 Web 管理平台，支援任務指派、進度更新、附件上傳</li><li>加入統計儀表板，呈現部門工作量、完成率、逾期率</li><li>權限管理：依部門與職級設定可視範圍</li></ul><h2>技術與架構</h2><ul><li>ASP.NET / C# 後端開發</li><li>SQL Server 資料庫設計</li><li>jQuery + Bootstrap 前端互動</li><li>IIS 部署於企業內部網路</li></ul><h2>成果</h2><ul><li>任務遺漏率下降 80%</li><li>管理層可即時掌握各部門工作負荷</li><li>全公司 8 個部門、50+ 使用者每日使用</li></ul>",
+    "featured": true
+  },
+  {
+    "id": "sys-reward-points",
+    "title": "紅利集點系統",
+    "summary": "會員紅利點數的累計、兌換與管理系統，串接 POS 端即時計算。",
+    "category": "web",
+    "tags": ["C#", "ASP.NET", "SQL Server", "POS 串接", "API"],
+    "date": "2023-08-05",
+    "cover": "assets/images/works/sys-reward-points/cover.jpg",
+    "images": [
+      "assets/images/works/sys-reward-points/01.jpg"
+    ],
+    "links": {
+      "demo": "",
+      "download": ""
+    },
+    "content": "<h2>背景與目標</h2><p>企業推行會員制度，需要一套紅利集點系統，讓客戶在消費時自動累計點數，並可在門市兌換商品或折抵消費。系統需與現有 POS 系統即時串接。</p><h2>我做了什麼</h2><ul><li>設計紅利點數規則引擎（消費累點、活動加碼、點數效期）</li><li>開發後台管理系統（會員查詢、點數調整、活動設定）</li><li>API 開發，與 POS 系統即時串接</li><li>點數異動紀錄與對帳報表</li><li>異常防護機制（重複扣點、超額兌換）</li></ul><h2>技術與架構</h2><ul><li>C# / ASP.NET 後端開發</li><li>SQL Server 資料庫設計（交易級一致性）</li><li>RESTful API 與 POS 端串接</li><li>排程報表自動產出與寄送</li></ul><h2>成果</h2><ul><li>會員回購率提升 20%</li><li>POS 端即時查詢回應時間 < 1 秒</li><li>管理後台支援行銷團隊自行設定活動規則</li></ul>",
+    "featured": true
+  },
+  {
+    "id": "sys-weight-scale",
+    "title": "磅單系統與地磅資料串接",
+    "summary": "整合工廠地磅硬體，自動讀取過磅數據並寫入 ERP，取代人工抄寫流程。",
+    "category": "tools",
+    "tags": ["C#", "WinForms", "RS-232", "SQL Server", "硬體串接"],
+    "date": "2024-09-01",
+    "cover": "assets/images/works/sys-weight-scale/cover.jpg",
+    "images": [
+      "assets/images/works/sys-weight-scale/01.jpg"
+    ],
+    "links": {
+      "demo": "",
+      "download": ""
+    },
+    "content": "<h2>背景與目標</h2><p>食品製造廠區的原物料進出貨都需要過磅紀錄。過去由人工在地磅旁抄寫數據，再回辦公室輸入系統，流程繁瑣且容易出現抄寫錯誤。目標是讓地磅數據自動讀取並直接寫入 ERP。</p><h2>我做了什麼</h2><ul><li>分析地磅設備通訊協定（RS-232 串列埠）</li><li>開發 Windows 桌面應用程式，自動讀取並解析磅秤數據</li><li>設計磅單管理介面（車號、品項、毛重/皮重/淨重）</li><li>資料即時寫入 SQL Server / ERP 資料表</li><li>斷線偵測與自動重連機制</li><li>歷史磅單查詢與報表列印功能</li></ul><h2>技術與架構</h2><ul><li>C# / .NET WinForms 桌面應用</li><li>System.IO.Ports 串列埠通訊</li><li>ADO.NET 連接 SQL Server</li><li>資料同步機制確保 ERP 資料一致</li></ul><h2>成果</h2><ul><li>人工抄寫錯誤率降為零</li><li>每次過磅作業節省 2-3 分鐘</li><li>日均處理數百筆過磅紀錄，全自動化</li></ul>",
+    "featured": true
+  },
+  {
+    "id": "sys-product-code",
+    "title": "品號管理與標籤列印系統",
+    "summary": "統一管理產品品號編碼規則，並整合條碼/標籤列印設備，提升倉儲作業效率。",
+    "category": "tools",
+    "tags": ["C#", "WinForms", ".NET", "條碼列印", "SQL Server"],
+    "date": "2024-01-15",
+    "cover": "assets/images/works/sys-product-code/cover.jpg",
+    "images": [
+      "assets/images/works/sys-product-code/01.jpg"
+    ],
+    "links": {
+      "demo": "",
+      "download": ""
+    },
+    "content": "<h2>背景與目標</h2><p>隨著產品線擴充，品號編碼規則不統一、標籤格式各異的問題日益嚴重。倉儲人員經常因品號混亂導致揀貨錯誤。目標是建立統一的品號管理機制，並整合條碼標籤列印，提升倉儲作業正確率。</p><h2>我做了什麼</h2><ul><li>制定品號編碼規則（品類碼 + 規格碼 + 流水號）</li><li>開發品號管理桌面工具，支援新增、查詢、停用</li><li>整合條碼列印設備，支援多種標籤格式</li><li>串接 ERP 品號主檔，確保資料同步</li><li>批次列印功能，支援大量標籤需求</li></ul><h2>技術與架構</h2><ul><li>C# / .NET WinForms 桌面應用</li><li>SQL Server 品號主檔管理</li><li>條碼列印 SDK 整合（ZPL 指令）</li><li>ERP API 同步品號異動</li></ul><h2>成果</h2><ul><li>品號編碼統一，查詢效率提升 60%</li><li>倉儲揀貨錯誤率下降 70%</li><li>標籤列印從手動排版改為一鍵產出</li></ul>",
+    "featured": true
+  }
+]

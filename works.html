@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代表性專案 - Brent1980</title>
+  <meta name="description" content="Brent1980 代表性專案 - 企業系統整合、內部工具開發、流程自動化等專案成果展示。">
+  <meta property="og:title" content="代表性專案 - Brent1980">
+  <meta property="og:description" content="企業系統整合、內部工具開發、流程自動化等專案成果展示。">
+  <meta property="og:image" content="assets/images/og.png">
+  <meta property="og:url" content="https://brent1980.com/works.html">
+  <link rel="canonical" href="https://brent1980.com/works.html">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">Brent1980</a>
+      <nav class="nav" id="nav">
+        <a href="index.html" class="nav-link">首頁</a>
+        <a href="about.html" class="nav-link">關於我</a>
+        <a href="works.html" class="nav-link active">專案實績</a>
+        <a href="services.html" class="nav-link">專業能力</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="切換深色/淺色模式">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+        </button>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="開啟選單">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>代表性專案</h1>
+      <p>每一個專案都源自企業真實痛點，以成果為導向的系統解決方案</p>
+    </div>
+  </section>
+
+  <!-- Works Section -->
+  <section class="section">
+    <div class="container">
+      <!-- Toolbar -->
+      <div class="works-toolbar">
+        <div class="filter-buttons" id="filterButtons">
+          <button class="filter-btn active" data-filter="all">全部</button>
+          <button class="filter-btn" data-filter="web">Web 系統</button>
+          <button class="filter-btn" data-filter="tools">內部工具</button>
+          <button class="filter-btn" data-filter="automation">自動化/整合</button>
+        </div>
+        <div class="search-box">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="searchInput" placeholder="搜尋專案...">
+        </div>
+      </div>
+
+      <!-- Works Grid -->
+      <div class="works-grid" id="worksGrid">
+        <!-- JS will populate -->
+      </div>
+
+      <!-- No Results -->
+      <div class="no-results" id="noResults">
+        <p>找不到符合條件的專案，請嘗試其他關鍵字或分類。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-copy">&copy; 2025 Brent1980. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/works.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      loadAllWorks();
+    });
+  </script>
+</body>
+</html>
