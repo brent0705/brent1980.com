@@ -1,19 +1,15 @@
 /* ========================================
-   works.js - Brent1980.com
-   Load works from JSON, filter, search, detail page
+   works.js — System Log Theme
    ======================================== */
 
 var worksData = [];
 
 var categoryLabels = {
-  web: 'Web 系統',
-  tools: '內部工具',
-  automation: '自動化/整合'
+  web:        'web.system',
+  tools:      'internal.tool',
+  automation: 'automation'
 };
 
-/**
- * Fetch works.json
- */
 function fetchWorks() {
   return fetch('data/works.json')
     .then(function (res) { return res.json(); })
@@ -23,62 +19,66 @@ function fetchWorks() {
     });
 }
 
-/**
- * Create a work card HTML string
- */
-function createWorkCard(work) {
-  var tagsHtml = work.tags.map(function (tag) {
-    return '<span class="tag">' + escapeHtml(tag) + '</span>';
-  }).join('');
-
-  var linksHtml = '';
-  if (work.links.demo) {
-    linksHtml += '<a href="' + escapeHtml(work.links.demo) + '" class="btn btn-sm btn-outline" target="_blank" rel="noopener noreferrer">Demo</a>';
-  }
-
-
-  return '<div class="work-card fade-in visible" data-category="' + escapeHtml(work.category) + '">' +
-    '<img src="' + escapeHtml(work.cover) + '" alt="' + escapeHtml(work.title) + '" class="work-card-cover" onerror="this.style.background=\'var(--color-bg-alt)\';this.alt=\'\';">' +
-    '<div class="work-card-body">' +
-      '<span class="work-card-category">' + escapeHtml(categoryLabels[work.category] || work.category) + '</span>' +
-      '<h3 class="work-card-title">' + escapeHtml(work.title) + '</h3>' +
-      '<p class="work-card-summary">' + escapeHtml(work.summary) + '</p>' +
-      '<div class="work-card-tags">' + tagsHtml + '</div>' +
-      '<div class="work-card-footer">' +
-        '<span class="work-card-date">' + escapeHtml(work.date) + '</span>' +
-        '<div class="work-card-links">' +
-          '<a href="work.html?id=' + encodeURIComponent(work.id) + '" class="btn btn-sm btn-primary">查看詳細</a>' +
-          linksHtml +
-        '</div>' +
-      '</div>' +
-    '</div>' +
-  '</div>';
+function escapeHtml(str) {
+  if (!str) return '';
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
 }
 
-/**
- * Load featured works on homepage
- */
+function createRecordItem(work) {
+  var tagsHtml = work.tags.map(function (tag) {
+    return '<span class="record-tag">' + escapeHtml(tag) + '</span>';
+  }).join('');
+
+  var year = work.year || (work.date ? work.date.substring(0, 4) : '—');
+  var cat  = categoryLabels[work.category] || work.category;
+
+  return (
+    '<div class="record-item reveal" data-category="' + escapeHtml(work.category) + '">' +
+      '<div class="record-header">' +
+        '<span class="record-year">' + escapeHtml(year) + '</span>' +
+        '<span class="record-category">' + escapeHtml(cat) + '</span>' +
+      '</div>' +
+      '<div class="record-title-line">' +
+        '<span class="record-prompt">&gt;</span>' +
+        '<span class="record-title">' + escapeHtml(work.title) + '</span>' +
+      '</div>' +
+      '<p class="record-summary">' + escapeHtml(work.summary) + '</p>' +
+      '<div class="record-meta">' +
+        '<div class="record-meta-row">' +
+          '<span class="record-meta-key">status</span>' +
+          '<span class="record-meta-val">: deployed</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="record-tags">' + tagsHtml + '</div>' +
+      '<a href="work.html?id=' + encodeURIComponent(work.id) + '" class="record-link">→ view record</a>' +
+    '</div>'
+  );
+}
+
 function loadFeaturedWorks() {
   var container = document.getElementById('featuredWorks');
   if (!container) return;
 
   fetchWorks().then(function (data) {
     var featured = data
-      .filter(function (w) { return w.featured; })
-      .sort(function (a, b) { return b.date.localeCompare(a.date); })
-      .slice(0, 6);
+      .filter(function (w) { return w.featured && w.visible !== false; })
+      .sort(function (a, b) {
+        if (a.sortOrder !== undefined && b.sortOrder !== undefined) return a.sortOrder - b.sortOrder;
+        return b.date.localeCompare(a.date);
+      })
+      .slice(0, 4);
 
-    container.innerHTML = featured.map(createWorkCard).join('');
+    container.innerHTML = '<div class="record-list">' + featured.map(createRecordItem).join('') + '</div>';
+    initReveal(container);
   });
 }
 
-/**
- * Load all works on works.html with filter & search
- */
 function loadAllWorks() {
-  var container = document.getElementById('worksGrid');
-  var noResults = document.getElementById('noResults');
-  var filterButtons = document.querySelectorAll('.filter-btn');
+  var container  = document.getElementById('worksGrid');
+  var noResults  = document.getElementById('noResults');
+  var filterBtns = document.querySelectorAll('.filter-btn');
   var searchInput = document.getElementById('searchInput');
 
   if (!container) return;
@@ -94,34 +94,39 @@ function loadAllWorks() {
 
   function renderWorks() {
     var filtered = worksData.filter(function (w) {
-      var matchCategory = currentFilter === 'all' || w.category === currentFilter;
-      var matchSearch = true;
+      if (w.visible === false) return false;
+      var matchCat = currentFilter === 'all' || w.category === currentFilter;
+      var matchQ = true;
       if (currentSearch) {
         var q = currentSearch.toLowerCase();
-        matchSearch =
+        matchQ =
           w.title.toLowerCase().indexOf(q) !== -1 ||
           w.summary.toLowerCase().indexOf(q) !== -1 ||
           w.tags.some(function (t) { return t.toLowerCase().indexOf(q) !== -1; }) ||
           (categoryLabels[w.category] || '').indexOf(q) !== -1;
       }
-      return matchCategory && matchSearch;
+      return matchCat && matchQ;
     });
 
-    filtered.sort(function (a, b) { return b.date.localeCompare(a.date); });
+    filtered.sort(function (a, b) {
+      if (a.sortOrder !== undefined && b.sortOrder !== undefined) return a.sortOrder - b.sortOrder;
+      return b.date.localeCompare(a.date);
+    });
 
     if (filtered.length === 0) {
       container.innerHTML = '';
       if (noResults) noResults.style.display = 'block';
     } else {
-      container.innerHTML = filtered.map(createWorkCard).join('');
+      container.innerHTML = filtered.map(createRecordItem).join('');
       if (noResults) noResults.style.display = 'none';
+      initReveal(container);
     }
   }
 
   function setupFilter() {
-    filterButtons.forEach(function (btn) {
+    filterBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        filterButtons.forEach(function (b) { b.classList.remove('active'); });
+        filterBtns.forEach(function (b) { b.classList.remove('active'); });
         this.classList.add('active');
         currentFilter = this.getAttribute('data-filter');
         renderWorks();
@@ -138,9 +143,6 @@ function loadAllWorks() {
   }
 }
 
-/**
- * Load work detail on work.html?id=xxx
- */
 function loadWorkDetail() {
   var container = document.getElementById('workDetail');
   if (!container) return;
@@ -149,7 +151,7 @@ function loadWorkDetail() {
   var id = params.get('id');
 
   if (!id) {
-    container.innerHTML = '<div class="section"><div class="container"><p>未指定專案 ID。<a href="works.html">回到專案列表</a></p></div></div>';
+    container.innerHTML = '<div class="section"><div class="container"><p style="font-family:var(--mono);color:var(--text-dim);">No project ID. <a href="works.html">← project.log</a></p></div></div>';
     return;
   }
 
@@ -157,96 +159,109 @@ function loadWorkDetail() {
     var work = data.find(function (w) { return w.id === id; });
 
     if (!work) {
-      container.innerHTML = '<div class="section"><div class="container"><p>找不到此專案。<a href="works.html">回到專案列表</a></p></div></div>';
+      container.innerHTML = '<div class="section"><div class="container"><p style="font-family:var(--mono);color:var(--text-dim);">Project not found. <a href="works.html">← project.log</a></p></div></div>';
       return;
     }
 
-    // Update page title and meta
-    document.title = work.title + ' - Brent1980';
+    document.title = work.title + ' — brent1980';
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', work.summary);
 
-    // Find prev/next
-    var sortedWorks = data.sort(function (a, b) { return b.date.localeCompare(a.date); });
-    var currentIndex = sortedWorks.findIndex(function (w) { return w.id === id; });
-    var prevWork = currentIndex < sortedWorks.length - 1 ? sortedWorks[currentIndex + 1] : null;
-    var nextWork = currentIndex > 0 ? sortedWorks[currentIndex - 1] : null;
+    var sorted = data.slice().sort(function (a, b) {
+      if (a.sortOrder !== undefined && b.sortOrder !== undefined) return a.sortOrder - b.sortOrder;
+      return b.date.localeCompare(a.date);
+    });
+    var idx = sorted.findIndex(function (w) { return w.id === id; });
+    var prevWork = idx < sorted.length - 1 ? sorted[idx + 1] : null;
+    var nextWork = idx > 0 ? sorted[idx - 1] : null;
 
-    // Build gallery
     var galleryHtml = '';
-    if (work.images && work.images.length > 0) {
-      galleryHtml = '<div class="work-detail-gallery">' +
+    if (work.images && work.images.length) {
+      galleryHtml = '<div class="work-gallery">' +
         work.images.map(function (img) {
-          return '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(work.title) + '" onerror="this.style.background=\'var(--color-bg-alt)\';this.style.minHeight=\'200px\';this.alt=\'\';">';
+          return '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(work.title) + '" onerror="this.style.display=\'none\'">';
         }).join('') +
-      '</div>';
+        '</div>';
     }
 
-    // Build tags
-    var tagsHtml = work.tags.map(function (tag) {
-      return '<span class="tag">' + escapeHtml(tag) + '</span>';
+    var tagsHtml = work.tags.map(function (t) {
+      return '<span class="record-tag">' + escapeHtml(t) + '</span>';
     }).join('');
 
-    // Build links
-    var linksHtml = '';
-    if (work.links.demo || work.links.repo || work.links.download) {
-      linksHtml = '<div class="work-detail-links">';
-      if (work.links.demo) {
-        linksHtml += '<a href="' + escapeHtml(work.links.demo) + '" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Demo</a>';
-      }
+    var year = work.year || (work.date ? work.date.substring(0, 4) : '—');
+    var cat  = categoryLabels[work.category] || work.category;
 
-      if (work.links.download) {
-        linksHtml += '<a href="' + escapeHtml(work.links.download) + '" class="btn btn-outline" target="_blank" rel="noopener noreferrer">下載</a>';
-      }
-      linksHtml += '</div>';
-    }
-
-    // Build prev/next nav
     var navHtml = '<div class="work-nav">';
-    if (prevWork) {
-      navHtml += '<a href="work.html?id=' + encodeURIComponent(prevWork.id) + '">&larr; ' + escapeHtml(prevWork.title) + '</a>';
-    } else {
-      navHtml += '<span></span>';
-    }
-    if (nextWork) {
-      navHtml += '<a href="work.html?id=' + encodeURIComponent(nextWork.id) + '">' + escapeHtml(nextWork.title) + ' &rarr;</a>';
-    } else {
-      navHtml += '<span></span>';
-    }
+    navHtml += prevWork
+      ? '<a href="work.html?id=' + encodeURIComponent(prevWork.id) + '">← ' + escapeHtml(prevWork.title) + '</a>'
+      : '<span></span>';
+    navHtml += nextWork
+      ? '<a href="work.html?id=' + encodeURIComponent(nextWork.id) + '">' + escapeHtml(nextWork.title) + ' →</a>'
+      : '<span></span>';
     navHtml += '</div>';
 
-    // Render
     container.innerHTML =
-      '<section class="work-detail-header" style="background-color: var(--color-bg-alt); border-bottom: 1px solid var(--color-border);">' +
+      '<div class="work-detail-head">' +
         '<div class="container">' +
-          '<span class="work-card-category">' + escapeHtml(categoryLabels[work.category] || work.category) + '</span>' +
+          '<a href="works.html" class="back-link">← project.log</a>' +
+          '<div class="work-detail-meta">' +
+            '<span class="record-year">' + escapeHtml(year) + '</span>' +
+            '<span class="record-category">' + escapeHtml(cat) + '</span>' +
+          '</div>' +
           '<h1 class="work-detail-title">' + escapeHtml(work.title) + '</h1>' +
           '<p class="work-detail-summary">' + escapeHtml(work.summary) + '</p>' +
-          '<div class="work-detail-meta">' +
-            '<span class="work-card-date">' + escapeHtml(work.date) + '</span>' +
-            '<div class="work-card-tags">' + tagsHtml + '</div>' +
-          '</div>' +
+          '<div class="work-detail-tags">' + tagsHtml + '</div>' +
         '</div>' +
-      '</section>' +
+      '</div>' +
       '<section class="section">' +
         '<div class="container">' +
-          galleryHtml +
-          '<div class="work-detail-content">' +
-            work.content +
+          '<div class="work-detail-body">' +
+            '<div>' +
+              galleryHtml +
+              '<div class="work-detail-content">' + work.content + '</div>' +
+              navHtml +
+            '</div>' +
+            '<aside class="work-sidebar">' +
+              '<div class="sidebar-section">' +
+                '<div class="sidebar-label">// status</div>' +
+                '<div class="sidebar-val" style="color:var(--green);">● deployed</div>' +
+              '</div>' +
+              '<div class="sidebar-section">' +
+                '<div class="sidebar-label">// year</div>' +
+                '<div class="sidebar-val">' + escapeHtml(year) + '</div>' +
+              '</div>' +
+              '<div class="sidebar-section">' +
+                '<div class="sidebar-label">// type</div>' +
+                '<div class="sidebar-val">' + escapeHtml(cat) + '</div>' +
+              '</div>' +
+              '<div class="sidebar-section">' +
+                '<div class="sidebar-label">// tech</div>' +
+                '<div class="work-detail-tags" style="margin-top:10px;gap:5px;flex-wrap:wrap;display:flex;">' + tagsHtml + '</div>' +
+              '</div>' +
+            '</aside>' +
           '</div>' +
-          linksHtml +
-          navHtml +
         '</div>' +
       '</section>';
   });
 }
 
-/**
- * Escape HTML to prevent XSS
- */
-function escapeHtml(str) {
-  if (!str) return '';
-  var div = document.createElement('div');
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
+function initReveal(container) {
+  var els = container
+    ? container.querySelectorAll('.reveal:not(.shown)')
+    : document.querySelectorAll('.reveal:not(.shown)');
+
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('shown');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.04, rootMargin: '0px 0px -16px 0px' });
+
+    els.forEach(function (el) { obs.observe(el); });
+  } else {
+    els.forEach(function (el) { el.classList.add('shown'); });
+  }
 }

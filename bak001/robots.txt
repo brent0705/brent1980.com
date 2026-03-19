@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brent1980.com/sitemap.xml

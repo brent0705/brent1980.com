@@ -1,34 +1,44 @@
 <!DOCTYPE html>
-<html lang="zh-Hant" data-theme="light">
+<html lang="zh-Hant" data-mode="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brent1980 - 企業系統整合與流程優化</title>
-  <meta name="description" content="Brent1980 - 16 年以上企業資訊系統開發與管理經驗。專注系統架構設計、企業內部系統整合、自動化流程與 API 建置。">
-  <meta property="og:title" content="Brent1980 - 企業系統整合與流程優化">
-  <meta property="og:description" content="16 年以上企業資訊系統開發與管理經驗。系統架構設計、流程優化、自動化整合。">
+  <title>brent1980 — System Developer / Integration Engineer</title>
+  <meta name="description" content="Brent Wu — 16 年以上企業資訊系統開發與管理經驗。系統架構設計、企業整合、自動化流程。">
+  <meta property="og:title" content="brent1980 — System Developer">
+  <meta property="og:description" content="16 年以上企業資訊系統實務經驗。系統架構、整合、自動化。">
   <meta property="og:image" content="assets/images/og.png">
   <meta property="og:url" content="https://brent1980.com">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://brent1980.com/">
-  <link rel="stylesheet" href="assets/css/style.css?v=1">
+  <link rel="stylesheet" href="assets/css/style.css?v=2">
 </head>
 <body>
+
+  <!-- Boot Overlay -->
+  <div id="boot-overlay">
+    <div class="boot-terminal">
+      <span class="boot-line dim">[ system boot ]</span>
+      <span class="boot-line dim">initializing...</span>
+      <span class="boot-line dim">loading modules...</span>
+      <span class="boot-line dim">checking dependencies...</span>
+      <span class="boot-line sep">────────────────────────────────</span>
+      <span class="boot-line ok">status: OK</span>
+      <span class="boot-line cmd">&gt; Brent Wu system ready</span>
+    </div>
+  </div>
 
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <a href="index.html" class="logo">Brent1980</a>
+      <a href="index.html" class="logo">brent1980</a>
       <nav class="nav" id="nav">
         <a href="index.html" class="nav-link active">首頁</a>
-        <a href="about.html" class="nav-link">關於我</a>
-        <a href="works.html" class="nav-link">專案實績</a>
-        <a href="services.html" class="nav-link">專業能力</a>
-        <a href="contact.html" class="nav-link">聯絡方式</a>
-        <button class="theme-toggle" id="themeToggle" aria-label="切換深色/淺色模式">
-          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
-        </button>
+        <a href="about.html" class="nav-link">關於</a>
+        <a href="works.html" class="nav-link">project.log</a>
+        <a href="services.html" class="nav-link">capabilities</a>
+        <a href="contact.html" class="nav-link">contact</a>
+        <button class="mode-toggle" id="modeToggle" title="D 鍵切換深度">D</button>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="開啟選單">
         <span></span><span></span><span></span>
@@ -39,98 +49,141 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <h1 class="hero-title">致力於設計穩健、可擴展的資訊系統架構</h1>
-      <p class="hero-subtitle">從問題源頭解決複雜的商業挑戰，為企業打造可持續發展的技術核心。</p>
-      <div class="hero-actions">
-        <a href="works.html" class="btn btn-primary">代表性專案</a>
-        <a href="about.html" class="btn btn-outline">認識我</a>
+      <div class="hero-inner">
+
+        <!-- Left: Profile Block -->
+        <div class="profile-block">
+          <div class="profile-label">[ profile ]</div>
+          <div class="profile-rule"></div>
+
+          <div class="profile-row">
+            <span class="profile-key">name</span>
+            <span class="profile-sep">:</span>
+            <span class="profile-val">Brent Wu</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-key">role</span>
+            <span class="profile-sep">:</span>
+            <span class="profile-val">System Developer</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-key"></span>
+            <span class="profile-sep"> </span>
+            <span class="profile-val" style="color:var(--text-dim);">Integration Engineer</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-key">status</span>
+            <span class="profile-sep">:</span>
+            <span class="profile-val is-active">active</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-key">uptime</span>
+            <span class="profile-sep">:</span>
+            <span class="profile-val">16+ years</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-key">stack</span>
+            <span class="profile-sep">:</span>
+            <span class="profile-val">C# · MSSQL · .NET · API</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-key">location</span>
+            <span class="profile-sep">:</span>
+            <span class="profile-val" style="color:var(--text-dim);">Taiwan</span>
+          </div>
+
+          <div class="hero-cmd-block">
+            <div class="cmd-line">
+              <span class="prompt">&gt;</span>
+              <span class="cmd-text" id="heroCmd"></span>
+              <span class="cursor">_</span>
+            </div>
+            <div class="cmd-output">Brent Wu — 處理真實系統的工程師</div>
+            <div class="cmd-output" style="color:var(--text-muted);">focus: enterprise integration · automation · reliability</div>
+          </div>
+        </div>
+
+        <!-- Right: Statement -->
+        <div class="hero-statement">
+          <div class="hero-tag">// system.developer &nbsp;·&nbsp; integration.engineer</div>
+          <h1 class="hero-heading">
+            長期處理<br>
+            <span class="hl">真實系統</span><br>
+            的工程師
+          </h1>
+          <p class="hero-desc">
+            不是在展示作品。<br>
+            是在留下工作的痕跡——16 年在企業環境裡，讓系統穩定、讓流程自動、讓資料流動。
+          </p>
+          <div class="hero-actions">
+            <a href="works.html" class="btn btn-primary">project.log</a>
+            <a href="about.html" class="btn btn-outline">sys.about</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Highlights -->
+  <!-- Capabilities Manifest -->
+  <section class="section" style="background:var(--bg-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="log-header">
+        <span class="log-label">[ capabilities.manifest ]</span>
+        <div class="log-rule"></div>
+        <span class="log-sub">// 核心能力</span>
+      </div>
+
+      <div class="manifest">
+        <div class="manifest-item reveal">
+          <span class="manifest-num">01</span>
+          <span class="manifest-name">system.architecture</span>
+          <span class="manifest-desc">企業內部系統的整體架構規劃。從需求分析、技術選型到模組設計，建構穩定可擴充的系統基礎。</span>
+        </div>
+        <div class="manifest-item reveal">
+          <span class="manifest-num">02</span>
+          <span class="manifest-name">system.integration</span>
+          <span class="manifest-desc">ERP、MES、POS 等多套企業系統串接整合。API 設計與開發、跨系統資料同步，消除資料孤島。</span>
+        </div>
+        <div class="manifest-item reveal">
+          <span class="manifest-num">03</span>
+          <span class="manifest-name">process.automation</span>
+          <span class="manifest-desc">識別重複性人工作業並設計自動化方案。排程報表、資料匯整、異常偵測與即時告警。</span>
+        </div>
+        <div class="manifest-item reveal">
+          <span class="manifest-num">04</span>
+          <span class="manifest-name">tooling.development</span>
+          <span class="manifest-desc">針對企業痛點開發桌面應用與 Web 管理工具。硬體設備串接、資料格式轉換、批次作業處理。</span>
+        </div>
+        <div class="manifest-item reveal">
+          <span class="manifest-num">05</span>
+          <span class="manifest-name">data.reporting</span>
+          <span class="manifest-desc">SQL 複雜查詢撰寫、營運報表系統設計、Excel/PDF 自動產出。讓散落資料轉化為決策依據。</span>
+        </div>
+        <div class="manifest-item reveal">
+          <span class="manifest-num">06</span>
+          <span class="manifest-name">ops.maintenance</span>
+          <span class="manifest-desc">既有系統效能調校、穩定性改善與日常維護。資料庫優化、程式碼重構，延長系統生命週期。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Project Records -->
   <section class="section">
     <div class="container">
-      <h2 class="section-title text-center">核心專長</h2>
-      <p class="section-subtitle text-center">從開發工程師到資訊主管，16 年實務歷練涵蓋系統全生命週期</p>
-      <div class="highlights-grid">
-        <div class="highlight-card fade-in">
-          <div class="highlight-icon">&#128736;&#65039;</div>
-          <h3>系統架構設計</h3>
-          <p>企業內部系統架構規劃，從需求分析到技術選型，建構穩定且可擴充的系統基礎。</p>
-        </div>
-        <div class="highlight-card fade-in">
-          <div class="highlight-icon">&#128260;</div>
-          <h3>企業系統整合</h3>
-          <p>ERP、MES、POS 等多套系統串接，API 設計與資料同步，打通企業資料孤島。</p>
-        </div>
-        <div class="highlight-card fade-in">
-          <div class="highlight-icon">&#9881;&#65039;</div>
-          <h3>流程自動化</h3>
-          <p>排程報表、資料同步、異常通知。將重複性作業自動化，降低人工錯誤與時間成本。</p>
-        </div>
-        <div class="highlight-card fade-in">
-          <div class="highlight-icon">&#128202;</div>
-          <h3>報表與數據分析</h3>
-          <p>SQL 查詢撰寫、營運報表自動產出、數據視覺化，讓管理決策有據可依。</p>
-        </div>
-        <div class="highlight-card fade-in">
-          <div class="highlight-icon">&#128187;</div>
-          <h3>內部工具開發</h3>
-          <p>針對企業實際痛點開發桌面應用與 Web 工具，提升作業效率與資料正確性。</p>
-        </div>
-        <div class="highlight-card fade-in">
-          <div class="highlight-icon">&#128101;</div>
-          <h3>跨部門協調</h3>
-          <p>資訊主管角色的實務歷練，擅長與業務、生產、管理層溝通，將需求轉化為系統方案。</p>
-        </div>
+      <div class="log-header">
+        <span class="log-label">[ project.records ]</span>
+        <div class="log-rule"></div>
+        <span class="log-sub">// 代表性紀錄</span>
       </div>
-    </div>
-  </section>
 
-  <!-- Featured Works -->
-  <section class="section" style="background-color: var(--color-bg-alt);">
-    <div class="container">
-      <h2 class="section-title text-center">代表性專案</h2>
-      <p class="section-subtitle text-center">從系統開發到流程優化，每個專案都是解決企業真實問題的成果</p>
-      <div class="works-grid" id="featuredWorks">
+      <div id="featuredWorks">
         <!-- JS will populate -->
       </div>
-      <div style="text-align:center; margin-top:40px;">
-        <a href="works.html" class="btn btn-outline">查看全部專案</a>
-      </div>
-    </div>
-  </section>
 
-  <!-- Services Summary -->
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title text-center">專業能力範疇</h2>
-      <p class="section-subtitle text-center">企業資訊系統的完整解決方案，從規劃、開發到維運</p>
-      <div class="services-grid">
-        <div class="service-card fade-in">
-          <div class="service-icon">&#128736;&#65039;</div>
-          <h3>系統架構規劃</h3>
-          <p>企業內部系統架構設計、技術選型、模組規劃，建構可擴充的系統藍圖。</p>
-        </div>
-        <div class="service-card fade-in">
-          <div class="service-icon">&#128260;</div>
-          <h3>ERP / MES 整合</h3>
-          <p>企業核心系統整合串接、API 設計、跨系統資料同步與自動化。</p>
-        </div>
-        <div class="service-card fade-in">
-          <div class="service-icon">&#128187;</div>
-          <h3>企業內部工具</h3>
-          <p>針對業務痛點開發桌面應用與 Web 管理工具，提升作業效率。</p>
-        </div>
-        <div class="service-card fade-in">
-          <div class="service-icon">&#128202;</div>
-          <h3>報表與自動化</h3>
-          <p>營運報表自動產出、排程作業、資料同步、異常告警通知。</p>
-        </div>
-      </div>
-      <div style="text-align:center; margin-top:40px;">
-        <a href="services.html" class="btn btn-primary">了解更多</a>
+      <div style="margin-top:40px;">
+        <a href="works.html" class="btn btn-outline">→ view all records</a>
       </div>
     </div>
   </section>
@@ -138,16 +191,23 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-content">
-        <p class="footer-copy">&copy; 2025 Brent1980. All rights reserved.</p>
-      </div>
+      <div class="footer-left">© 2025 brent1980 &nbsp;·&nbsp; all systems operational</div>
+      <div class="footer-right">press <span style="color:var(--cyan)">L</span> for key hints &nbsp;·&nbsp; <span style="color:var(--cyan)">D</span> to toggle depth</div>
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=1"></script>
-  <script src="assets/js/works.js?v=1"></script>
+  <!-- Key Hints Overlay -->
+  <div id="key-hints">
+    <div class="kh-title">// keyboard shortcuts</div>
+    <div class="kh-row"><span class="kh-key">D</span><span class="kh-desc">toggle dark / darker</span></div>
+    <div class="kh-row"><span class="kh-key">L</span><span class="kh-desc">show / hide this panel</span></div>
+    <div class="kh-row"><span class="kh-key">ESC</span><span class="kh-desc">close panel</span></div>
+  </div>
+
+  <script src="assets/js/main.js?v=2"></script>
+  <script src="assets/js/works.js?v=2"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       loadFeaturedWorks();
     });
   </script>
