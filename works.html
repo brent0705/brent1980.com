@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>project.log — brent1980</title>
-  <meta name="description" content="brent1980 project.log — 企業系統整合、內部工具開發、流程自動化的實際紀錄。">
+  <meta name="description" content="brent1980 project.log — 企業系統整合、內部工具開發、流程自動化的實際紀錄。每一個專案都源自真實的企業痛點。">
   <meta property="og:title" content="project.log — brent1980">
   <meta property="og:image" content="assets/images/og.png">
   <meta property="og:url" content="https://brent1980.com/works.html">
@@ -12,7 +12,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <link rel="stylesheet" href="assets/css/style.css?v=3">
+  <link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 <body>
 
@@ -26,7 +26,6 @@
         <a href="works.html" class="nav-link active">project.log</a>
         <a href="services.html" class="nav-link">capabilities</a>
         <a href="contact.html" class="nav-link">contact</a>
-        <button class="mode-toggle" id="modeToggle" title="D 鍵切換深度">D</button>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="開啟選單">
         <span></span><span></span><span></span>
@@ -39,7 +38,10 @@
     <div class="container">
       <div class="page-header-label">// project.records</div>
       <h1>project.log</h1>
-      <p>每一筆紀錄都是真實系統的工作痕跡。從問題定義到部署上線的完整過程。</p>
+      <p>
+        這裡記錄的不是作品展示，而是工作的痕跡。<br>
+        每一筆都是真實的企業問題，每一筆都有從混亂到穩定的過程。
+      </p>
     </div>
   </div>
 
@@ -62,10 +64,7 @@
         </div>
       </div>
 
-      <!-- Works Grid -->
       <div id="worksGrid"></div>
-
-      <!-- No Results -->
       <div class="no-results" id="noResults">no matching records found.</div>
 
     </div>
@@ -75,19 +74,12 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-left">© 2025 brent1980</div>
-      <div class="footer-right">press <span style="color:var(--cyan)">L</span> for shortcuts &nbsp;·&nbsp; <span style="color:var(--cyan)">D</span> depth</div>
+      <div class="footer-right">brent.wuhn@gmail.com</div>
     </div>
   </footer>
 
-  <div id="key-hints">
-    <div class="kh-title">// keyboard shortcuts</div>
-    <div class="kh-row"><span class="kh-key">D</span><span class="kh-desc">toggle dark / darker</span></div>
-    <div class="kh-row"><span class="kh-key">L</span><span class="kh-desc">show / hide this panel</span></div>
-    <div class="kh-row"><span class="kh-key">ESC</span><span class="kh-desc">close panel</span></div>
-  </div>
-
-  <script src="assets/js/main.js?v=3"></script>
-  <script src="assets/js/works.js?v=3"></script>
+  <script src="assets/js/main.js?v=4"></script>
+  <script src="assets/js/works.js?v=4"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () { loadAllWorks(); });
   </script>
